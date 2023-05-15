@@ -104,4 +104,6 @@ exports.getForecastWeather = asyncHandler(async (req, res, next) => {
 // @route  GET /weather/history
 // @access Private
 
-exports.getHistoryWeather = asyncHandler(async (req, res, next) => {});
+exports.getHistoryWeather = asyncHandler(async (req, res, next) => {
+  res.status(200).send("Should return history weather data");
+});

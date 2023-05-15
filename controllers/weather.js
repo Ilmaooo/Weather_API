@@ -100,10 +100,8 @@ exports.getForecastWeather = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @desc   Get historical weather data for a specific location
+// @desc   Get the historical weather data for a specific location within a date range
 // @route  GET /weather/history
 // @access Private
 
-exports.getHistoryWeather = asyncHandler(async (req, res, next) => {
-  res.status(200).send("Returns historical weather data");
-});
+exports.getHistoryWeather = asyncHandler(async (req, res, next) => {});

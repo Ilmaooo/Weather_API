@@ -1,22 +1,24 @@
 const express = require("express");
-const request = require("request");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/error");
 const cookieParser = require("cookie-parser");
+const setupSwaggerMiddleware = require("./swagger");
+
+const app = express();
 
 //load env variables
 dotenv.config({ path: "./config/config.env" });
 
 //connect to database
+
 connectDB();
 
 //Route files
 const weather = require("./routes/weather");
 const auth = require("./routes/auth");
-
-const app = express();
+const { setup } = require("swagger-ui-express");
 
 //Body parser
 app.use(express.json());
@@ -33,6 +35,9 @@ if (process.env.NODE_ENV === "development") {
 app.use(express.json());
 app.use("/weather", weather);
 app.use("/", auth);
+
+//swagger
+setupSwaggerMiddleware(app);
 
 app.use(errorHandler);
 

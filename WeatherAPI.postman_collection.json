@@ -1,0 +1,247 @@
+{
+	"info": {
+		"_postman_id": "cc423cbd-5229-407e-b21f-cdf7ecd355f0",
+		"name": "Weather app API",
+		"description": "StartFragment\n\nThis Postman collection is designed to develop a RESTful API for a weather app. The collection enables users to access current weather conditions, weather forecasts, and historical weather data for a specific location. It provides a comprehensive set of endpoints to retrieve accurate weather information based on user input.\n\nThe collection includes the following endpoints:\n\n1. /weather/current: Users can send a request to this endpoint to retrieve the current weather conditions for a specific location. The API returns data such as temperature, humidity, wind speed, and atmospheric conditions.\n2. /weather/forecast: This endpoint allows users to request the weather forecast for a specific location. By sending a request to this endpoint, users receive information about the predicted weather conditions for the upcoming period, including temperature changes, precipitation, and wind patterns.\n3. /weather/history: Users can utilize this endpoint to retrieve historical weather data for a specific location. By specifying the desired location and the time range in the request, the API returns weather information for that particular period, enabling users to analyze past weather patterns.\n    \n\nThe collection also incorporates robust error handling mechanisms. It ensures that users receive appropriate error responses when encountering invalid location inputs or server errors. These error handling mechanisms contribute to a seamless user experience, providing clear and informative error messages.\n\nEndFragment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23200213"
+	},
+	"item": [
+		{
+			"name": "Weather",
+			"item": [
+				{
+					"name": "GET Weather history data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/weather/history",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"weather",
+								"history"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "returns historical weather data for a specific location"
+					},
+					"response": []
+				},
+				{
+					"name": "GET weather forecast",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/weather/forecast?city=sarajevo",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"weather",
+								"forecast"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "sarajevo"
+								}
+							]
+						},
+						"description": " returns the weather forecast for a specific location"
+					},
+					"response": []
+				},
+				{
+					"name": "GET Current weather",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/weather/current?city=sarajevo",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"weather",
+								"current"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "sarajevo"
+								}
+							]
+						},
+						"description": "Returns the current weather conditions for a specific location."
+					},
+					"response": []
+				}
+			],
+			"description": "StartFragment\n\n1. /weather/current: Users can send a request to this endpoint to retrieve the current weather conditions for a specific location. The API returns data such as temperature, humidity, wind speed, and atmospheric conditions.\n2. /weather/forecast: This endpoint allows users to request the weather forecast for a specific location. By sending a request to this endpoint, users receive information about the predicted weather conditions for the upcoming period, including temperature changes, precipitation, and wind patterns.\n3. /weather/history: Users can utilize this endpoint to retrieve historical weather data for a specific location. By specifying the desired location and the time range in the request, the API returns weather information for that particular period, enabling users to analyze past weather patterns.\n    \n\nEndFragment"
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"TOKEN\", pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Belma\",\r\n    \"email\": \"belma@gmail.com\",\r\n    \"password\": \"123456\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/register",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"register"
+							]
+						},
+						"description": "Add user to database with encrypted password"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"TOKEN\", pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ilma@gmail.com\",\r\n    \"password\": \"123456\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get current user via token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/me",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Routes for user authentication including register, login, reset password etc."
+		}
+	]
+}

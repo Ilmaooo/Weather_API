@@ -10,7 +10,11 @@ const errorHandler = (err, req, res, next) => {
 
   //mongoose duplicate key
   if (err.code === 11000) {
+<<<<<<< HEAD
     const message = "Email address is already in use ";
+=======
+    const message = "Duplicate field entered";
+>>>>>>> origin/authentication
     error = new ErrorResponse(message, 400);
   }
 

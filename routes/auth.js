@@ -5,6 +5,7 @@ const { login } = require("../controllers/auth");
 const router = express.Router();
 const { protect } = require("../middleware/auth");
 
+<<<<<<< HEAD
 /**
  * @swagger
  * /register:
@@ -113,6 +114,10 @@ router.post("/login", login);
  *       500:
  *         description: Internal Server Error - Error occurred while retrieving user information.
  */
+=======
+router.post("/register", register);
+router.post("/login", login);
+>>>>>>> origin/authentication
 router.get("/me", protect, getMe);
 
 module.exports = router;
